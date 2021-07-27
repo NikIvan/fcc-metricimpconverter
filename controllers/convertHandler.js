@@ -80,14 +80,16 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) {
-    const result = input.match(unitRegex)[0];
-    const isValid = this.units[result] != null;
+    const unitInput = input.match(unitRegex)[0].toLowerCase();
+    const initUnit = Object
+      .keys(this.units)
+      .find((key) => key.toLowerCase() === unitInput);
 
-    if (!isValid) {
+    if (initUnit == null) {
       throw new Error('unit');
     }
     
-    return result;
+    return initUnit;
   };
   
   this.getReturnUnit = function(initUnit) {

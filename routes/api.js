@@ -31,11 +31,6 @@ module.exports = function (app) {
         errors[err.message] = err.message;
       }
 
-      console.dir({
-        initNum,
-        initUnit,
-      });
-
       if (errors.number != null || errors.unit != null) {
         if (errors.number && errors.unit) {
           return res.send(`invalid ${errors.number} and ${errors.unit}`);
