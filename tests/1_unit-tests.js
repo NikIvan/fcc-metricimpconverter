@@ -5,7 +5,7 @@ const ConvertHandler = require('../controllers/convertHandler.js');
 
 const convertHandler = new ConvertHandler();
 
-suite('Convert handler tests', () => {
+suite('Unit Tests', () => {
   const validUnits = Object.keys(convertHandler.units);
 
   test('should correctly read a whole number input', () => {
@@ -43,7 +43,7 @@ suite('Convert handler tests', () => {
   test('should correctly return an error on a double-fraction (i.e. 3/2/3)', () => {
     const input = '3/2/3km';
 
-    expect(() => convertHandler.getNum(input)).to.throw(Error, 'number');
+    assert.throws(() => convertHandler.getNum(input));
   });
 
   test('should correctly default to a numerical input of 1 when no numerical input is provided', () => {
@@ -56,7 +56,7 @@ suite('Convert handler tests', () => {
 
   test('should correctly read each valid input unit', () => {
     validUnits.every((input) => {
-      expect(() => convertHandler.getUnit(input)).to.not.throw(Error, 'unit');
+      assert.doesNotThrow(() => convertHandler.getUnit(input));
     });
   });
 
@@ -64,7 +64,7 @@ suite('Convert handler tests', () => {
     const invalidInputs = ['1al', '2.3al', '2/3e', '3/2', '3.4', '2'];
 
     invalidInputs.every((input) => {
-      expect(() => convertHandler.getUnit(input)).to.throw(Error, 'unit');
+      assert.throws(() => convertHandler.getUnit(input));
     });
   });
 
